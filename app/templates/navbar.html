@@ -1,0 +1,33 @@
+{{ define "navbar" }}
+
+<nav class="navbar navbar-light navbar-fixed-top bg-faded navbar-full" id="nav-main">
+  <a class="navbar-brand" href="/">RideMerge</a>
+  <div class="nav-right">
+    <!-- Button trigger modal -->
+    {{ if .LoggedIn }}
+      <div id="user-display">
+        <div id="welcome-display">Hi,
+          <span id="username-display">
+            <a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ .FirstName }}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a href="/dashboard" class="dropdown-item nav-item">Dashboard</a>
+              <a href="#" class="dropdown-item nav-item" data-toggle="modal" data-target="#unsubscribeModal">Unsubscribe</a>
+            </div>
+          </span>
+        </div>
+        <a href="#" class="nav-item" id="logout-action-button">Logout</a>
+      </div>
+    <!-- Button trigger modal -->
+      <a href="#" class="post-button nav-item" data-toggle="modal" data-target="#postModal"><i class="fa fa-paper-plane post-icon fa-lg fa-2x" aria-hidden="true"></i>Post Ride</a>
+    {{ else }}
+      <a href="#" data-toggle="modal"data-target="#register-modal" class="register-button nav-item">Register</a>
+      <a href="#" class="login-button nav-item" data-toggle="modal" data-target="#loginModal">Login</a>
+    {{ end }}
+  </div>
+</nav>
+
+{{ template "register" }}
+{{ template "unsubscribe" }}
+{{ template "login" }}
+{{ template "post" }}
+{{ end }}

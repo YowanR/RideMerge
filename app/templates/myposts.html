@@ -1,0 +1,43 @@
+{{ define "content" }}
+<div class="content">
+  <div class="btn-group trip-buttons" role="group" aria-label="Trips">
+    <a href="/dashboard" class="btn btn-secondary">My Trips</a>
+    <a href="/dashboard/searchresults" class="btn btn-secondary">Search Trips</a>
+  </div>
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      {{ if .Trips }}
+        {{ range .Trips }}
+        <div class="jumbotron search-item">
+          <h3 class="event-field">{{ .Event }}</h3>
+          <h5 class="name-field">{{ .CreatedBy }}</h5>
+          <hr class="my-4">
+          <table class="ride-info">
+            <tr>
+              <th class="origin-field">Origin</th>
+              <th class="dest-field">Destination</th>
+              <th class="depart-date-field">Departure Date</th>
+              <th class="depart-time-field">Departure Time</th>
+              <th class="has-car-field">Has Car</th>
+              <th class="seats-field">Seats Available</th>
+            </tr>
+              <tr>
+                <td>{{ .Origin }}</td>
+                <td>{{ .Destination }}</td>
+                <td>{{ .DDate }}</td>
+                <td>{{ .DTime }}</td>
+                <td>{{ .HasCar }}</td>
+                <td>{{ .Seats }}</td>
+              </tr>
+          </table>
+        </div>
+        {{ end }}
+      {{ else }}
+        <div class="empty-message">You don't have any trips :(</div>
+      {{ end }}
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+{{ end }}

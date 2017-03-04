@@ -1,0 +1,39 @@
+{{ define "register" }}
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal-label"
+   aria-hidden="true" data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="register-modal-title">Create Account</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="username" class="form-control-label">First Name:</label>
+            <input type="text" id="register-firstname" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="username" class="form-control-label">Last Name:</label>
+            <input type="text" id="register-lastname" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="username" class="form-control-label">Email:</label>
+            <input type="text" id="register-email" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="username" class="form-control-label">Password:</label>
+            <input type="password" id="register-password" class="form-control" autocomplete="off">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div id="user-exists-message">User already exists. Please log in.</div>
+        <button id="register-action-button" type="button" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

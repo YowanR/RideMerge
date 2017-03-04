@@ -1,0 +1,18 @@
+runtime: go
+env: flex
+
+handlers:
+- url: /static/stylesheets
+  mime_type: 'text/css'
+  static_dir: stylesheets
+- url: /templates
+  mime_type: 'text/html'
+  static_dir: templates
+- url: /static/img
+  mime_type: 'image/jpeg'
+  static_dir: img
+- url: /static/js
+  mime_type: 'text/javascript'
+  static_dir: js
+- url: /.*
+  script: _go_app

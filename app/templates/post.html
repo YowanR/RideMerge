@@ -1,0 +1,69 @@
+{{ define "post" }}
+
+<!-- Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="postModalLabel">Ride Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="post-form">
+          <div class="form-group">
+            <label for="event" class="form-control-label">Event:</label>
+            <input id="event" type="text" name="event" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="createdby" class="form-control-label">Name:</label>
+            <input id="createdby" type="text" name="createdby" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="origin" class="form-control-label">Origin:</label>
+            <input id="origin" type="text" name="origin" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="destination" class="form-control-label">Destination:</label>
+            <input id="destination" type="text" name="destination" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="departure-date" class="form-control-label">Departure Date:</label>
+            <input id="departureDate" type="text" name="departureDate" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="departure-time" class="form-control-label">Departure Time:</label>
+            <input id="departureTime" type="text" name="departureTime" class="form-control" autocomplete="off">
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input id="hasCar" type="checkbox" class="form-check-input">
+              Has Car
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="seatAvailSelect">Seats Available</label>
+            <select id="seatAvailSelect" class="form-control" name="seatsAvailable">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="post-button" type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

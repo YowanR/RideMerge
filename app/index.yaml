@@ -1,0 +1,6 @@
+indexes:
+
+- kind: Trip
+  properties:
+  - name: Destination
+    direction: asc
