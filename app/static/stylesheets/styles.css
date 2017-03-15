@@ -71,6 +71,7 @@
 .dropdown-item {
   line-height: 2rem;
 }
+
 /* index */
 body {
   font-family: 'Raleway';
@@ -155,12 +156,12 @@ img {
   width: 25%;
 }
 
-#email-error-message, #password-error-message, #user-exists-message {
+#login-error-message, #register-error-message {
     position: absolute;
-    bottom: 2rem;
+    bottom: 1.5rem;
     left: 30%;
     display: none;
-    color: #A94442;
+    color: #ce0a00;
 }
 
 #user-display {
@@ -192,6 +193,7 @@ img {
 .post-icon {
   padding-right: 0.5rem;
 }
+
 /* content */
 
 th {

@@ -30,6 +30,7 @@ func main() {
 	http.HandleFunc("/dashboard", dashboard)
 	http.HandleFunc("/dashboard/searchresults", searchResults)
 	http.HandleFunc("/unsubscribe", unsubscribe)
+	http.HandleFunc("/splash", splash)
 	http.HandleFunc("/", index)
 	log.Print("Listening on port 8080")
 	appengine.Main()
@@ -154,8 +155,12 @@ func unsubscribe(w http.ResponseWriter, r *http.Request) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
+	_, err := r.Cookie("first_time")
+	if err != nil {
+		http.Redirect(w, r, "/splash", http.StatusTemporaryRedirect)
+		return
+	}
 	session := ridemerge.GetSession(r)
-	var err error
 	if session.LoggedIn {
 		session.User, err = ridemerge.UDB.GetUser(session.Email)
 		if err != nil {
@@ -164,6 +169,15 @@ func index(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	serveTemplate(w, session, "index", "navbar", "home", "login", "register", "post", "unsubscribe")
+}
+
+func splash(w http.ResponseWriter, r *http.Request) {
+	session := ridemerge.GetSession(r)
+	_, err := r.Cookie("first_time")
+	if err == nil {
+		http.Redirect(w, r, "/", http.StatusFound)
+	}
+	serveTemplate(w, session, "index", "splash")
 }
 
 func dashboard(w http.ResponseWriter, r *http.Request) {

@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="login-form">
           <div class="form-group">
             <label for="name" class="form-control-label">Email:</label>
             <input id="login-email" type="text" name="username" class="form-control" autocomplete="off">
@@ -23,8 +23,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <div id="email-error-message">User does not exist.</div>
-        <div id="password-error-message">Incorrect password</div>
+        <div id="login-error-message"></div>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         <button id="login-action-button" type="button" class="btn btn-primary">Login</button>
       </div>

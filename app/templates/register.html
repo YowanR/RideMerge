@@ -10,7 +10,7 @@
         <h4 class="modal-title" id="register-modal-title">Create Account</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="register-form">
           <div class="form-group">
             <label for="username" class="form-control-label">First Name:</label>
             <input type="text" id="register-firstname" class="form-control" autocomplete="off">
@@ -30,7 +30,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <div id="user-exists-message">User already exists. Please log in.</div>
+        <div id="register-error-message"></div>
         <button id="register-action-button" type="button" class="btn btn-primary">Create</button>
       </div>
     </div>

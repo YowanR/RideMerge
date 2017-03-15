@@ -1,46 +1,127 @@
 var ENTER_KEY = 13;
 
+function isBlank(formId) {
+    blank = false;
+    $(formId+" input").each(function() {
+        if (this.value == "") {
+            blank = true;
+            return false;
+        }
+    });
+    return blank;
+}
+
+// w3schools
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 $(document).ready(function() {
+    if (getCookie("first_time") === "true") {
+        setCookie("first_time", "false", 365);
+        console.log(getCookie("first_time"));
+        $("#register-modal").modal("show");
+    }
     $("#register-action-button").click(function(e) {
         e.preventDefault();
+        firstname = $("#register-firstname").val();
+        lastname = $("#register-lastname").val();
+        email = $("#register-email").val();
+        password = $("#register-password").val();
+        if (isBlank("#register-form")) {
+            $("#register-error-message").text("The above fields are required.");
+            $("#register-error-message").show();
+            $("input#register-firstname.form-control").css("border", "1px solid #ce0a00");
+            $("input#register-lastname.form-control").css("border", "1px solid #ce0a00");
+            $("input#register-email.form-control").css("border", "1px solid #ce0a00");
+            $("input#register-password.form-control").css("border", "1px solid #ce0a00");
+            return;
+        }
+        re = new RegExp('.+@.+\.(com|edu)');
+        if (!re.test(email)) {
+            $("#register-error-message").text("Invalid Email Address");
+            $("#register-error-message").show();
+            $("input#register-firstname.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
+            $("input#register-lastname.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
+            $("input#register-email.form-control").css("border", "1px solid #ce0a00");
+            $("input#register-password.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
+            return;
+        }
         $.ajax({
             url: '/register',
             type: 'post',
             dataType: 'html',
             data: {
-                firstname: $("#register-firstname").val(),
-                lastname: $("#register-lastname").val(),
-                email: $("#register-email").val(),
-                password: $("#register-password").val()
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password
             },
             success: function(data) {
                 if (data === "true") {
                     window.location.href = "/";
                 } else {
-                    $("#user-exists-message").show();
+                    $("#register-error-message").text("User already exists. Please log in.");
+                    $("#register-error-message").show();
+                    $("input#register-firstname.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
+                    $("input#register-lastname.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
+                    $("input#register-email.form-control").css("border", "1px solid #ce0a00");
+                    $("input#login-password.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
                 }
             },
         });
     });
     $("#login-action-button").click(function(e) {
         e.preventDefault();
+        email = $("#login-email").val();
+        password = $("#login-password").val();
+        if (isBlank("#login-form")) {
+            $("#login-error-message").text("The above fields are required.");
+            $("#login-error-message").show();
+            $("input#login-email.form-control").css("border", "1px solid #ce0a00");
+            $("input#login-password.form-control").css("border", "1px solid #ce0a00");
+            return;
+        }
         $.ajax({
             url: '/login',
             type: 'post',
             dataType: 'html',
             data: {
-                email: $("#login-email").val(),
-                password: $("#login-password").val()
+                email: email,
+                password: password
             },
             success: function(data) {
                 if (data === "true") {
                     window.location.href = "/";
                 } else if (data === "email") {
-                    $("#email-error-message").show();
-                    $("#password-error-message").hide();
+                    $("#login-error-message").text("Incorrect Email");
+                    $("#login-error-message").show();
+                    $("input#login-email.form-control").css("border", "1px solid #ce0a00");
+                    $("input#login-password.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
                 } else {
-                    $("#password-error-message").show();
-                    $("#email-error-message").hide();
+                    $("#login-error-message").text("Incorrect Password");
+                    $("#login-error-message").show();
+                    $("input#login-password.form-control").css("border", "1px solid #ce0a00");
+                    $("input#login-email.form-control").css("border", "1px solid rgba(0,0,0,0.15)");
                 }
             },
         });
